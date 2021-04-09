@@ -1,0 +1,35 @@
+<Configuration status="debug">
+    <Properties>
+        <Property name="LOG_PATTERN">%x %d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Property>
+    </Properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%highlight{${LOG_PATTERN}}"/>
+        </Console>
+        <File name="File1" fileName="assertion.log" append="false">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <MarkerFilter marker="ASSERTION" onMatch="ACCEPT" onMismatch="DENY"/>
+        </File>
+        <File name="File2" fileName="gibberish.log" append="false">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <MarkerFilter marker="GIBBERISH" onMatch="ACCEPT" onMismatch="DENY"/>
+        </File>
+        <File name="File3" fileName="noMarker.log" append="false">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <NoMarkerFilter onMatch="ACCEPT" onMismatch="DENY"/>
+        </File>
+        <File name="File4" fileName="curfew.log" append="false">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <TimeFilter start="20:00:00" end="05:00:00" onMatch="ACCEPT" onMismatch="DENY"/>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Root level="all">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File1"/>
+            <AppenderRef ref="File2"/>
+            <AppenderRef ref="File3"/>
+            <AppenderRef ref="File4"/>
+        </Root>
+    </Loggers>
+</Configuration>
