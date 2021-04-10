@@ -6,7 +6,21 @@ public class Main {
     private static final Marker ASSERTION_MARKER = MarkerManager.getMarker("ASSERTION");
     private static final Marker GIBBERISH_MARKER = MarkerManager.getMarker("GIBBERISH");
 
+    public static boolean isInteger(String s){
+        try{
+            Integer.parseInt(s);
+        }
+        catch (NumberFormatException exception){
+            return false;
+        }
+       return true;
+    }
     public static void main(String[] args) {
+        if(!isInteger(args[0]) || Integer.valueOf(args[0]) < 0){
+            System.out.println("Input must be positive integer");
+            return;
+        }
+
         String rhyme[] = {"Hickory dickory dock",
                 "The mouse went up the clock",
                 "The clock struck one. The mouse went down",
